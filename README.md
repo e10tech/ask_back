@@ -1,15 +1,16 @@
-📘 ask_back Backend README
+# 📘 ask_back Backend README
 
-FastAPI × uv を利用した ask_app バックエンド開発環境構築ガイドです。
+> FastAPI × uv を利用した ask_app バックエンド開発環境構築ガイドです。
 
-以下の内容は、そのまま GitHub の README.md としてご利用いただけるよう整理しております。
+---
 
-📘 uv（次世代Pythonパッケージマネージャ）完全ガイド
+## 📘 uv（次世代Pythonパッケージマネージャ）完全ガイド
 
 Tech0 / ask_app（FastAPI バックエンド）チーム向け
 
+---
 
-🎉 まずは結論：チームメンバーが clone した後に行うこと
+## 🎉 まずは結論：チームメンバーが clone した後に行うこと
 
 ```sh
 git clone git@github.com:e10tech/ask_back.git
@@ -19,7 +20,7 @@ uv sync                  # 依存を再現
 uv run fastapi dev main.py
 ```
 
-メモ：✔ uv sync は以下を自動でやる
+### 💡 メモ：uv sync は以下を自動で行います
 ```sh
 1️⃣ 必要な Python バージョンの存在チェック
 2️⃣ なかったら自動インストール（uv が持ってる高速 installer）
@@ -27,24 +28,26 @@ uv run fastapi dev main.py
 4️⃣ 依存パッケージを uv.lock に基づいて再現
 ```
 
-🔧 新たにライブラリを追加したい場合
+---
+
+## 🔧 新たにライブラリを追加したい場合
 
 uv を利用する場合は非常にシンプルです。
 
-📌 基本コマンド
+### 📌 基本コマンド
 
 ```sh
 uv add パッケージ名
 ```
 
-📘 例：SQLAlchemy や Pydantic を追加したい場合
+### 📘 例：SQLAlchemy や Pydantic を追加したい場合
 
 ```sh
 uv add sqlalchemy
 uv add pydantic
 ```
 
-📘 例：FastAPI でよく利用する追加ライブラリ
+### 📘 例：FastAPI でよく利用する追加ライブラリ
 
 ```sh
 uv add python-dotenv
@@ -52,13 +55,15 @@ uv add passlib[bcrypt]
 uv add email-validator
 ```
 
-📌 削除したい場合
+### 📌 削除したい場合
 
 ```sh
 uv remove パッケージ名
 ```
 
-✨ ポイント
+---
+
+## ✨ ポイント
 
 uv add を実行すると pyproject.toml に自動で追記されます。
 
@@ -66,8 +71,9 @@ uv.lock も自動更新されるため、依存の固定が常に最新となり
 
 チームメンバーは uv sync を実行するだけで同じ環境を再現できます。
 
+---
 
-🌟 uvとは？
+## 🌟 uvとは？
 
 uv は Python の以下の機能をすべてまとめて高速に扱える次世代ツールです。
 
@@ -76,7 +82,7 @@ uv は Python の以下の機能をすべてまとめて高速に扱える次世
 - ロックファイル管理（pip-tools / poetry 的）
 - Python バージョン管理（pyenv 的）
 
-🔥 特徴まとめ
+### 🔥 特徴まとめ
 
 - 超高速（pip の 10〜100倍速い）
 - ディレクトリごとの .venv を自動管理
@@ -84,9 +90,11 @@ uv は Python の以下の機能をすべてまとめて高速に扱える次世
 - uv lock で依存バージョンを固定
 - FastAPI との相性抜群（fastapi dev と組み合わせると快適）
 
-🛠️ 1. uv のインストール方法
+---
 
-🔵 Windows（PowerShell 推奨）
+## 🛠️ 1. uv のインストール方法
+
+### 🔵 Windows（PowerShell 推奨）
 
 📌 公式インストーラ
 
@@ -106,7 +114,7 @@ everything's installed!
 $env:Path = "$env:UserProfile\.local\bin;$env:Path"
 ```
 
-🍎 macOS
+### 🍎 macOS
 
 📌 公式インストーラ（推奨）
 
@@ -128,7 +136,7 @@ brew install uv
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
-🧩 PATH が通っていない場合とは？
+#### 🧩 PATH が通っていない場合とは？
 
 PATH とは、OS が「コマンドを探す場所のリスト」です。
 
@@ -166,7 +174,9 @@ OS が uv を見つけられず "コマンドが認識されない" となりま
 uv --version
 ```
 
-🧱 2. プロジェクト作成（FastAPI 用）
+---
+
+## 🧱 2. プロジェクト作成（FastAPI 用）
 
 FastAPI バックエンドはこの 2 行で最短セットアップが可能です。
 
@@ -175,7 +185,7 @@ uv init -p 3.11 ask_back
 cd ask_back
 ```
 
-📁 自動生成される構造
+### 📁 自動生成される構造
 
 ```
 ask_back/
@@ -185,7 +195,9 @@ ask_back/
 └── main.py             ← サンプルアプリ
 ```
 
-📦 3. 依存パッケージの追加
+---
+
+## 📦 3. 依存パッケージの追加
 
 FastAPI + DB 用の依存をまとめてインストール：
 
@@ -193,7 +205,7 @@ FastAPI + DB 用の依存をまとめてインストール：
 uv add "fastapi[standard]" sqlalchemy pydantic pydantic-settings pymysql python-dotenv
 ```
 
-📌 説明
+### 📌 説明
 
 - fastapi[standard] → FastAPI 本体 + 開発ツール（fastapi dev / uvicorn）
 - sqlalchemy → DB ORM
@@ -201,15 +213,17 @@ uv add "fastapi[standard]" sqlalchemy pydantic pydantic-settings pymysql python-
 - pymysql → Azure MySQL 用ドライバ
 - python-dotenv → .env 読み込み
 
-🚀 4. FastAPI の起動方法
+---
 
-🧪 開発サーバー（最新版推奨）
+## 🚀 4. FastAPI の起動方法
+
+### 🧪 開発サーバー（最新版推奨）
 
 ```sh
 uv run fastapi dev main.py
 ```
 
-✨ 特徴
+### ✨ 特徴
 
 - 自動リロード
 - .env 自動読み込み
@@ -217,20 +231,22 @@ uv run fastapi dev main.py
 - ログが見やすい
 - OpenAPI ドキュメント /docs も自動生成
 
-🌐 アクセス
+### 🌐 アクセス
 
 http://127.0.0.1:8000
 http://127.0.0.1:8000/docs
 
-🏭 本番サーバー（reload なし）
+### 🏭 本番サーバー（reload なし）
 
 ```sh
 uv run fastapi run main.py
 ```
 
-🔧 5. uv でよく使うコマンドまとめ
+---
 
-📌 仮想環境・依存管理
+## 🔧 5. uv でよく使うコマンドまとめ
+
+### 📌 仮想環境・依存管理
 
 ```sh
 uv init -p 3.11 myapp      # プロジェクト作成
@@ -242,7 +258,7 @@ uv lock                    # lock 更新
 uv pip list                # 仮想環境のパッケージ一覧
 ```
 
-📌 実行系
+### 📌 実行系
 
 ```sh
 uv run python main.py         # 仮想環境自動適用
@@ -250,7 +266,9 @@ uv run fastapi dev main.py    # FastAPI 開発サーバー
 uv run uvicorn main:app       # 従来型 Uvicorn 実行
 ```
 
-🔐 6. .env の管理（ローカル / 本番）
+---
+
+## 🔐 6. .env の管理（ローカル / 本番）
 
 .env.local
 
@@ -274,7 +292,9 @@ DATABASE_URL=mysql+pymysql://user:password@host:3306/db_name
 !.env.example
 ```
 
-🧱 7. プロジェクト構造（ベストプラクティス）
+---
+
+## 🧱 7. プロジェクト構造（ベストプラクティス）
 
 ```
 ask_back/
@@ -293,7 +313,9 @@ ask_back/
   uv.lock
 ```
 
-🧠 8. よくあるトラブルと対処
+---
+
+## 🧠 8. よくあるトラブルと対処
 
 | トラブル                | 原因                | 解決策                |
 |-------------------------|---------------------|-----------------------|
@@ -302,7 +324,9 @@ ask_back/
 | .env が読まれない       | config の env_file の設定違い | Config.env_file を確認 |
 | Windows の CRLF 警告    | OS 仕様             | 無視OK / .gitattributes で統一 |
 
-🌈 9. まとめ（uv の強み）
+---
+
+## 🌈 9. まとめ（uv の強み）
 
 - activate 不要（自動で .venv を検知）
 - uv add で依存管理が簡単
