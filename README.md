@@ -13,6 +13,10 @@ Tech0 / ask_app（FastAPI バックエンド）チーム向け
 ## 🎉 まずは結論：チームメンバーが clone した後に行うこと
 
 ```sh
+#まずはUVがインストールされていることを確認
+uv --version
+#インストールされていない場合は、READMEの「🛠️ 1. uv のインストール方法」を参照してください。
+
 git clone git@github.com:e10tech/ask_back.git
 cd ask_back
 
